@@ -1,0 +1,7 @@
+@media screen and (max-width: 1200px) {
+  .table-filter-sec-main {
+    flex-direction: column;
+    align-items: center !important;
+    gap: 20px;
+  }
+}
