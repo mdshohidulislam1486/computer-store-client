@@ -15,7 +15,7 @@ const MainLayout: React.FC = () => {
     dispatch(logout());
   };
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout style={{ minHeight: '95vh' }}>
       <Sider
         breakpoint="lg"
         collapsedWidth="0"

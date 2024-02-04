@@ -17,10 +17,17 @@ const AddNewProductForm: React.FC<FunctionProps> = ({
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setProduct((prev: TProduct) => ({
-      ...prev,
-      [name]: value,
-    }));
+    if (name === 'price') {
+      setProduct((prev: TProduct) => ({
+        ...prev,
+        [name]: parseFloat(value),
+      }));
+    } else {
+      setProduct((prev: TProduct) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -44,6 +51,7 @@ const AddNewProductForm: React.FC<FunctionProps> = ({
           placeholder="Product Price"
           value={product.price}
           name="price"
+          type="number"
           required
           onChange={handleChange}
         />

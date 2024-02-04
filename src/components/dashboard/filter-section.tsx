@@ -89,7 +89,7 @@ const FilterSection: React.FC<FunctionProps> = ({ filterProps }) => {
   };
 
   useEffect(() => {
-    if (filterType) {
+    if (filterType && filterType !== 'price') {
       const filterQuery: TResult[] = data.reduce((result, item) => {
         const getItem: string = item[filterType];
 

@@ -7,7 +7,7 @@ type TableRowSelection<T> = TableProps<T>['rowSelection'];
 
 export type DataType = {
   name: string;
-  price: string;
+  price: number;
   quantity: string;
   category: string;
   brand: string;

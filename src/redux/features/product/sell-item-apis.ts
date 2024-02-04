@@ -8,7 +8,7 @@ const sellItemApis = baseApi.injectEndpoints({
         method: 'POST',
         body: sellItemData,
       }),
-      invalidatesTags: ['getAllComputer'],
+      invalidatesTags: ['getAllComputer', 'getAllSellHistory'],
     }),
     getAllSellItem: builder.query({
       query: (args) => {
@@ -18,6 +18,7 @@ const sellItemApis = baseApi.injectEndpoints({
           params: args,
         };
       },
+      providesTags: ['getAllSellHistory'],
     }),
   }),
 });
