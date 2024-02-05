@@ -120,7 +120,7 @@ const AddNewProductForm: React.FC<FunctionProps> = ({
           required
         />
       </div>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: 15 }}>
         {mode !== 'edit' && (
           <Button type="primary" htmlType="submit">
             Button

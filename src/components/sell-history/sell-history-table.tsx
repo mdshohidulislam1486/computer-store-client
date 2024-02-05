@@ -3,19 +3,37 @@ import type { TableColumnsType } from 'antd';
 import { TSellItem } from '../../types/sell-item';
 import { useGetAllSellItemQuery } from '../../redux/features/product/sell-item-apis';
 import { useEffect, useState } from 'react';
+import Loading from '../../utlis/Loading';
 
 const SellHistoryTable = () => {
   const [sellHistory, setSellHistory] = useState<TSellItem[] | null>(null);
-  const [historyPeriod, setHistoryPeriod] = useState<string | null>(null);
-  const { data, isError } = useGetAllSellItemQuery({ time: historyPeriod });
+  const [historyPeriod, setHistoryPeriod] = useState<string>('daily');
+  const { data, isLoading, isError } = useGetAllSellItemQuery({
+    time: historyPeriod,
+  });
 
   useEffect(() => {
     if (data) {
       setSellHistory(data.data);
     }
   }, [data]);
-  if (isError) return <p>There were an error fetching history</p>;
 
+  if (isLoading) return <Loading />;
+  if (isError)
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '50vh',
+          fontWeight: 'bold',
+          color: 'red',
+        }}
+      >
+        <p className="text-red-500">Something went wrong</p>
+      </div>
+    );
   const handleSelect = (value: string) => {
     setHistoryPeriod(value);
   };

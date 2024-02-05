@@ -1,4 +1,4 @@
-import { Spin } from 'antd';
+import { Flex, Spin } from 'antd';
 
 const Loading = () => {
   return (
@@ -10,9 +10,13 @@ const Loading = () => {
         alignItems: 'center',
       }}
     >
-      <Spin tip="Loading" size="large">
-        <div className="content" />
-      </Spin>
+      <Flex gap="small" vertical>
+        <Flex gap="small">
+          <Spin tip="Loading" size="large">
+            <div className="content" />
+          </Spin>
+        </Flex>
+      </Flex>
     </div>
   );
 };
