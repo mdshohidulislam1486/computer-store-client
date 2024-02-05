@@ -36,6 +36,7 @@ const Register: React.FC<TRegisterProps> = ({
           onChange={handleChange}
           required={true}
           minLength={6}
+          type="password"
           value={registerData.password}
         />
         <Input
@@ -44,6 +45,7 @@ const Register: React.FC<TRegisterProps> = ({
           onChange={handleChange}
           required={true}
           minLength={6}
+          type="password"
           value={registerData.retypePassword}
         />
         <Button htmlType="submit">Register</Button>

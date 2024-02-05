@@ -26,6 +26,7 @@ const Login: React.FC<TLoginProps> = ({
         <Input
           placeholder="Password"
           name="password"
+          type="password"
           required={true}
           onChange={handleChange}
           value={loginData.password}
