@@ -143,7 +143,7 @@ const FilterSection: React.FC<FunctionProps> = ({ filterProps }) => {
           <div>
             <h3 style={{ marginBottom: 10 }}>Add Maximum Price Range</h3>
             <Input
-              placeholder="Basic usage"
+              placeholder="Add Price"
               onChange={(e) => setFilterParams!(e.target.value)}
             />
           </div>

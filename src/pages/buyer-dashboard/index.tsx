@@ -15,7 +15,7 @@ import { iniTialProduct } from '../../utlis/initalProduct';
 import { toast } from 'sonner';
 import '../../components/dashboard/dashboard.css';
 
-const StoreDashboard: React.FC = () => {
+const ProductDashboard: React.FC = () => {
   const [filterType, setFilterType] = useState('');
   const [filterParams, setFilterParams] = useState<unknown>();
   const [modalOpen, setModalOpen] = useState(false);
@@ -131,19 +131,8 @@ const StoreDashboard: React.FC = () => {
         selectedRowKeys={selectedRowKeys}
         handleSellProduct={handleSellProduct}
       />
-      <EditProductModal
-        addEditMode={addEditMode}
-        modalOpen={modalOpen}
-        setModalOpen={setModalOpen}
-        editItem={editItem}
-      />
-      <SellProductModal
-        sellProductModal={sellProductModal}
-        setSellProductModal={setSellProductModal}
-        sellItemData={sellItemData}
-      />
     </div>
   );
 };
 
-export default StoreDashboard;
+export default ProductDashboard;

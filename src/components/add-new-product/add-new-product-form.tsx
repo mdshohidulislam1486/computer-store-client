@@ -51,8 +51,8 @@ const AddNewProductForm: React.FC<FunctionProps> = ({
           placeholder="Product Price"
           value={product.price}
           name="price"
-          type="number"
           required
+          type="number"
           onChange={handleChange}
         />
         <Input

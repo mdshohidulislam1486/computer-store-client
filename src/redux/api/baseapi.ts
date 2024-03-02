@@ -11,6 +11,7 @@ import { RootState } from '../store';
 import { logout, setUser } from '../features/auth/authSlice';
 
 const baseQuery = fetchBaseQuery({
+  // baseUrl: 'https://assignment-5-sand.vercel.app/api/v1',
   baseUrl: 'https://assignment-5-sand.vercel.app/api/v1',
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
@@ -55,6 +56,6 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 export const baseApi = createApi({
   reducerPath: 'baseApi',
   baseQuery: baseQueryWithRefreshToken,
-  tagTypes: ['getAllComputer', 'getAllSellHistory'],
+  tagTypes: ['getAllComputer', 'getAllSellHistory', 'getAllCupon'],
   endpoints: () => ({}),
 });

@@ -12,7 +12,7 @@ const Loading = () => {
     >
       <Flex gap="small" vertical>
         <Flex gap="small">
-          <Spin tip="Loading" size="large">
+          <Spin tip="Loading " size="large" style={{ position: 'relative' }}>
             <div className="content" />
           </Spin>
         </Flex>

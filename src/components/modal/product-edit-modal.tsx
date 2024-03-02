@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Modal } from 'antd';
 import AddNewProductForm from '../add-new-product/add-new-product-form';
 import { iniTialProduct } from '../../utlis/initalProduct';
-import { useEditSingleProductMutation } from '../../redux/features/product/product-apis';
+import {
+  useAddSingleProductMutation,
+  useEditSingleProductMutation,
+} from '../../redux/features/product/product-apis';
 import { toast } from 'sonner';
 import { TProduct } from '../../types/product';
 
@@ -10,21 +13,24 @@ type FunctionProps = {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   modalOpen: boolean;
   editItem: TProduct;
+  addEditMode: string;
 };
 
 const EditProductModal: React.FC<FunctionProps> = ({
   setModalOpen,
   modalOpen,
   editItem,
+  addEditMode,
 }) => {
   const [product, setProduct] = useState(iniTialProduct);
   const [editSingleProduct] = useEditSingleProductMutation(undefined);
+  const [addSingleProduct] = useAddSingleProductMutation(undefined);
   const handleSubmit = async () => {};
   useEffect(() => {
     setProduct(editItem);
   }, [editItem]);
 
-  const editData = async () => {
+  const addAndeditData = async () => {
     const toastId = toast.loading('Editing Products');
     const requiredKeys = [
       'name',
@@ -48,30 +54,53 @@ const EditProductModal: React.FC<FunctionProps> = ({
       });
       return;
     }
-    try {
-      const res = await editSingleProduct({
-        proudctData: product,
-        id: product._id,
-      }).unwrap();
-      toast.success('Product Edited Successfully', {
-        id: toastId,
-        duration: 2000,
-      });
-      setModalOpen(false);
-    } catch (error) {
-      toast.error('Something went wrong Could not Edit product', {
-        id: toastId,
-        duration: 2000,
-      });
+    if (addEditMode && addEditMode === 'edit') {
+      try {
+        const res = await editSingleProduct({
+          proudctData: product,
+          id: product._id,
+        }).unwrap();
+        toast.success('Product Edited Successfully', {
+          id: toastId,
+          duration: 2000,
+        });
+        setModalOpen(false);
+      } catch (error) {
+        toast.error('Something went wrong Could not Edit product', {
+          id: toastId,
+          duration: 2000,
+        });
+      }
+    } else if (addEditMode && addEditMode === 'add') {
+      const addPayload = { ...product };
+      const fieldsToRemove = ['__v', '_id'];
+      for (const field of fieldsToRemove) {
+        if (Object.hasOwnProperty.call(addPayload, field)) {
+          delete addPayload[field];
+        }
+      }
+      try {
+        const res = await addSingleProduct(addPayload).unwrap();
+        toast.success('Product Added Successfully', {
+          id: toastId,
+          duration: 2000,
+        });
+        setModalOpen(false);
+      } catch (error) {
+        toast.error('Something went wrong Could not add the product', {
+          id: toastId,
+          duration: 2000,
+        });
+      }
     }
   };
   return (
     <>
       <Modal
-        title="Edit Product "
+        title={addEditMode === 'edit' ? 'Edit Product ' : 'Duplicate Product'}
         centered
         open={modalOpen}
-        onOk={editData}
+        onOk={addAndeditData}
         onCancel={() => setModalOpen(false)}
       >
         <AddNewProductForm

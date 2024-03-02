@@ -26,6 +26,7 @@ const productApis = baseApi.injectEndpoints({
         method: 'POST',
         body: proudctData,
       }),
+      invalidatesTags: ['getAllComputer'],
     }),
     editSingleProduct: builder.mutation({
       query: ({ proudctData, id }) => {

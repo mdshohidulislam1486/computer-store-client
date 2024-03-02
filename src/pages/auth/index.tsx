@@ -18,7 +18,7 @@ export type TAuthData = {
   email: string;
   password: string;
   retypePassword: string;
-  role: 'admin';
+  role: '';
   passwordChangedAt: Date;
 };
 const AuthSection: React.FC = () => {
@@ -27,7 +27,7 @@ const AuthSection: React.FC = () => {
     email: '',
     password: '',
     retypePassword: '',
-    role: 'admin',
+    role: '',
     passwordChangedAt: new Date(),
   };
   const [authData, setAuthData] = useState(initialData);
@@ -57,7 +57,8 @@ const AuthSection: React.FC = () => {
       const user = verifyToken(res.data.accessToken) as TUser;
       dispatch(setUser({ user: user, token: res.data.accessToken }));
       toast.success('Logged in', { id: toastId, duration: 2000 });
-      navigate(`/${user.role}/inventory`);
+
+      // navigate(`/${user.role}/inventory`);
     } catch (error) {
       toast.error('Something went wrong', { id: toastId, duration: 2000 });
     }
@@ -118,6 +119,7 @@ const AuthSection: React.FC = () => {
       ) : (
         <Register
           handleChange={handleChange}
+          setAuthData={setAuthData}
           registerData={authData}
           handleRegister={handleRegister}
         />

@@ -1,32 +1,14 @@
-# React + TypeScript + Vite
+# project will run locally with "npm run dev" command
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Please check 'Cors-Origin"
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Server live API: 'https://assignment-5-sand.vercel.app/api/v1',
+- Server Local API: 'http://localhost:5000/api/v1',
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-};
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+You have to register first to Login - Role is setup as admin by default
+You can use this credential for login too:
+user: snaeem.wd@gmail.com
+pass: 123456
 
 # l2b2-full-stack-a5-client-side-mdshohidulislam1486
-
-# computer-store-client
+# l2-b2-assignment-6-fronten-mdshohidulislam1486

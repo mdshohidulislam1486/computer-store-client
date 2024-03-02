@@ -1,15 +1,22 @@
 import React from 'react';
-import { Button, Layout, Menu } from 'antd';
+import { Badge, Button, Layout, Menu } from 'antd';
 import { sideBarItemsGenerator } from '../../utlis/sidebar.genertors';
-import { storeManagement } from '../../route/admin.routes';
-import { Outlet } from 'react-router-dom';
-import { useAppDispatch } from '../../redux/hooks';
-import { logout } from '../../redux/features/auth/authSlice';
+import { storeManagement } from '../../route/seller.routes';
+import { Link, Outlet } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { currentUserData, logout } from '../../redux/features/auth/authSlice';
+import { purchaseManagement } from '../../route/buyer.route';
+import { useSelector } from 'react-redux';
+import { currentCart } from '../../redux/features/cart/cartSlice';
+import { ShoppingCartOutlined } from '@ant-design/icons';
 
 const { Header, Content, Footer, Sider } = Layout;
 
-const sideBar = sideBarItemsGenerator(storeManagement, 'admin');
+const sellerItems = sideBarItemsGenerator(storeManagement, 'seller');
+const buyerItems = sideBarItemsGenerator(purchaseManagement, 'buyer');
 const MainLayout: React.FC = () => {
+  const user = useAppSelector(currentUserData);
+  const cart = useAppSelector(currentCart);
   const dispatch = useAppDispatch();
   const handleLogout = () => {
     dispatch(logout());
@@ -25,6 +32,7 @@ const MainLayout: React.FC = () => {
         // onCollapse={(collapsed, type) => {
         //   console.log(collapsed, type);
         // }}
+        style={{ height: '100vh', position: 'sticky', top: '0', left: '0' }}
       >
         <div
           style={{
@@ -40,17 +48,34 @@ const MainLayout: React.FC = () => {
           mode="inline"
           theme="dark"
           defaultSelectedKeys={['4']}
-          items={sideBar}
+          items={user?.role === 'buyer' ? buyerItems : sellerItems}
         />
         <Button
           onClick={handleLogout}
-          style={{ position: 'fixed', top: '20px', right: '10px' }}
+          style={{ position: 'absolute', marginLeft: '10px', bottom: 30 }}
         >
           Logout
         </Button>
       </Sider>
       <Layout>
-        <Header style={{ padding: 0 }} />
+        <Header style={{ padding: '10px' }}>
+          <Link
+            to="/buyer/checkout"
+            style={{ position: 'absolute', right: '5%' }}
+          >
+            <Badge
+              count={cart?.totalItem | 0}
+              offset={[8, 3]}
+              color="red"
+              size="default"
+              style={{ cursor: 'pointer' }}
+            >
+              <ShoppingCartOutlined
+                style={{ color: 'white', fontSize: '24px' }}
+              />
+            </Badge>
+          </Link>
+        </Header>
         <Content style={{ margin: '24px 16px 0' }}>
           <Outlet />
         </Content>
